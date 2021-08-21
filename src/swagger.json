@@ -1,0 +1,160 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API da aplicação GoBarber",
+    "description": "API desenvolvida durante o bootvamp GoStack da Rocketseas para a aplicação GoBaber",
+    "contact": {
+      "email": "p.eduardo.32@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/sessions": {
+      "post": {
+        "summary": "Autenticação do usuario",
+        "description": "Rota para autenticação dos usuarios",
+        "tags": ["Sessions"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credenciais"
+              },
+              "examples": {
+                "credenciais": {
+                  "value": {
+                    "email": "p.eduardo.32@gmail.com",
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Senha ou email invalido"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sessao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointments": {
+      "get": {
+        "summary": "Listagem de agendamento",
+        "description": "Rota para listagem de agendamentos",
+        "tags": ["Appointments"],
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "400": {
+            "description": "Token não encontrado"
+          },
+          "402": {
+            "description": "Token invílido"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Agendamento"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Credenciais": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Sessao": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/Usuario"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "Agendamento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "provider_id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
