@@ -12,6 +12,7 @@ const usersRouter = Router();
 const upload = multer(uploadConfig);
 
 usersRouter.post('/', async (request, response) => {
+  // #swagger.tags = ['Users']
   const { name, email, password } = request.body;
 
   const createUser = new CreateUserService();
@@ -39,6 +40,8 @@ usersRouter.patch(
   ensureAuthenticated,
   upload.single('avatar'),
   async (request, response) => {
+    // #swagger.tags = ['Users']
+
     const updateUserAvatarService = new UpdateUserAvatarService();
 
     const user = await updateUserAvatarService.execute({
