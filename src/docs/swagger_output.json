@@ -12,7 +12,7 @@
     "http"
   ],
   "securityDefinitions": {
-    "apiKeyAuth": {
+    "bearerAuth": {
       "type": "apiKey",
       "in": "header",
       "name": "authorization",
@@ -27,14 +27,17 @@
         "tags": [
           "Appointments"
         ],
-        "description": "",
+        "summary": "Lista de agendamentos",
+        "description": "Endpoint para efetuar listagem de agendamentos.",
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "Lisdas te agenda mentos"
+          }
+        },
         "security": [
           {
-            "bearerAuth": [
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Mjk1NjQxODUsImV4cCI6MTYyOTY1MDU4NSwic3ViIjoiNjRkMGJmYjEtNDk5MC00MDRhLTg3ZTMtMjNiMGRiZDI1Yjk0In0.MN0ChMXR9vjyguLdTF3Cm4tcmKIkFVdIcJqjgyJ-Gws"
-            ]
+            "bearerAuth": []
           }
         ]
       },
@@ -107,8 +110,21 @@
         "tags": [
           "Sessions"
         ],
-        "description": "",
+        "summary": "Criação de sessão do usuario",
+        "description": "Endpoint para criação de sessão do usuarios da aplicação.",
         "parameters": [
+          {
+            "name": "email",
+            "description": "Email do usuario que deseja se autenticar",
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "password",
+            "description": "Senha do usuario que deseja se autenticar",
+            "type": "string",
+            "in": "query"
+          },
           {
             "name": "obj",
             "in": "body",
@@ -125,7 +141,14 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "O resultado da soma"
+          },
+          "401": {
+            "description": "Email ou senha inválida"
+          }
+        }
       }
     }
   },

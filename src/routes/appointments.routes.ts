@@ -14,8 +14,12 @@ appointmentsRouter.use(ensureAuthenticated);
 
 appointmentsRouter.get('/', async (request, response) => {
   // #swagger.tags = ['Appointments']
-  /* #swagger.security = [{"bearerAuth": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Mjk1NjQxODUsImV4cCI6MTYyOTY1MDU4NSwic3ViIjoiNjRkMGJmYjEtNDk5MC00MDRhLTg3ZTMtMjNiMGRiZDI1Yjk0In0.MN0ChMXR9vjyguLdTF3Cm4tcmKIkFVdIcJqjgyJ-Gws]
-  }] */
+  // #swagger.summary = 'Lista de agendamentos'
+  // #swagger.description = 'Endpoint para efetuar listagem de agendamentos.'
+  /* #swagger.responses[200] = {
+        description: 'Lisdas te agenda mentos'
+      } */
+  /* #swagger.security = [{"bearerAuth": []}] */
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
   const appointments = await appointmentsRepository.find();

@@ -7,7 +7,7 @@ const endpoint = ['src/routes/index.ts'];
 const doc = {
   host: 'localhost:3333',
   securityDefinitions: {
-    apiKeyAuth: {
+    bearerAuth: {
       type: 'apiKey',
       in: 'header', // can be 'header', 'query' or 'cookie'
       name: 'authorization', // name of the header, query parameter or cookie
