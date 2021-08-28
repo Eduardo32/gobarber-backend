@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 
+import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import swaggerUi from 'swagger-ui-express';
-import cors from 'cors';
 
 import 'express-async-errors';
 
+import '@shared/infra/typeorm';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
-import routes from './routes';
-import '@shared/infra/typeorm';
+
 import swaggerDocs from '../../../swagger.json';
+import routes from './routes';
 
 const app = express();
 
