@@ -18,7 +18,7 @@ interface IRequest {
 @injectable()
 class UpdateUserAvatarService {
   constructor(
-    @inject('UersRepository')
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
   ) {}
 
